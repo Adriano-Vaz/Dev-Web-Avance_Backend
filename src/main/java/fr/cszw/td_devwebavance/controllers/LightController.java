@@ -47,7 +47,19 @@ public class LightController {
 
     @DeleteMapping("{id}")
     public ResponseEntity<Void> deleteLight(@PathVariable Long id) {
-        log.info("We want to delete : " + id);
-        return new ResponseEntity<>(HttpStatus.OK);
+        // Check if id is null
+        if (id == null) return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        try {
+            this.lightService.deleteLight(id);
+            return new ResponseEntity<>(HttpStatus.OK);
+        } catch (DBException e) {
+            // Erreur 500
+            log.error(e.getMessage());
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        } catch (NotFoundException e) {
+            // Erreur 404 lorsque l'id de l'objet qu'on veut modifier n'existe pas en base
+            log.error(e.getMessage());
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
     }
 }

@@ -46,4 +46,14 @@ public class LightService {
             throw new DBException("Could not create light");
         }
     }
+
+    public void deleteLight(Long id) throws NotFoundException, DBException {
+        Light existing = this.lightRepository.findById(id).orElse(null);
+        if (existing == null) throw new NotFoundException("Can't find light with id :" + id);
+        try {
+            this.lightRepository.delete(existing);
+        } catch (Exception e) {
+            throw new DBException("Error with DB");
+        }
+    }
 }
