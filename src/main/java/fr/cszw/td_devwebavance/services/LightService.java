@@ -24,19 +24,24 @@ public class LightService {
 
         if (light.getId() != null) {
             // On veut modifier une lampe
+            // findById renvoie un Optionnal, ce qui signifie qu'il faut rajouter une méthode afin de palier à tous
+            //      les comportements possibles
             existing = this.lightRepository.findById(light.getId()).orElse(null);
+            // On check si l'object existe en base
             if (existing == null) throw new NotFoundException("Could not find light with id : " + light.getId());
         } else {
+            // On veut créer une lampe
             existing = new Light();
         }
 
+        // On modifie toutes les propriétés que l'on veut modifier de la lampe
         existing.setToggled(light.getToggled());
         existing.setColor(light.getColor());
         existing.setTitle(light.getTitle());
 
         try {
-            Light lightCreated = this.lightRepository.save(existing);
-            return lightCreated;
+            // On sauvegarde la lampe en BDD
+            return this.lightRepository.save(existing);
         } catch (Exception e) {
             throw new DBException("Could not create light");
         }

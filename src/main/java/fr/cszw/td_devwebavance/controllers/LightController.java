@@ -30,13 +30,16 @@ public class LightController {
     public ResponseEntity<Light> postLight(@RequestBody Light lightSent) {
         try {
             log.info("Creating light ...");
+            // La condition ternaire permet de changer le code de retour en fonction du "mode" voulu
             return lightSent.getId() == null ?
                     new ResponseEntity<>(this.lightService.updateLight(lightSent), HttpStatus.CREATED) :
                     new ResponseEntity<>(this.lightService.updateLight(lightSent), HttpStatus.ACCEPTED);
         } catch (DBException e) {
+            // Erreur 500
             log.error(e.getMessage());
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         } catch (NotFoundException e) {
+            // Erreur 404 lorsque l'id de l'objet qu'on veut modifier n'existe pas en base
             log.error(e.getMessage());
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
