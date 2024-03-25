@@ -7,7 +7,7 @@ import lombok.Setter;
 @AllArgsConstructor
 @Getter
 @Setter
-public class DBException extends Exception {
+public class NotFoundException extends Exception {
 
     private String message;
 }

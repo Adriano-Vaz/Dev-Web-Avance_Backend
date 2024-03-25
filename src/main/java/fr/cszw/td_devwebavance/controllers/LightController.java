@@ -1,6 +1,7 @@
 package fr.cszw.td_devwebavance.controllers;
 
 import fr.cszw.td_devwebavance.exceptions.DBException;
+import fr.cszw.td_devwebavance.exceptions.NotFoundException;
 import fr.cszw.td_devwebavance.models.Light;
 import fr.cszw.td_devwebavance.services.LightService;
 import lombok.RequiredArgsConstructor;
@@ -29,10 +30,15 @@ public class LightController {
     public ResponseEntity<Light> postLight(@RequestBody Light lightSent) {
         try {
             log.info("Creating light ...");
-            return new ResponseEntity<>(this.lightService.updateLight(lightSent), HttpStatus.CREATED);
+            return lightSent.getId() == null ?
+                    new ResponseEntity<>(this.lightService.updateLight(lightSent), HttpStatus.CREATED) :
+                    new ResponseEntity<>(this.lightService.updateLight(lightSent), HttpStatus.ACCEPTED);
         } catch (DBException e) {
             log.error(e.getMessage());
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        } catch (NotFoundException e) {
+            log.error(e.getMessage());
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
 
