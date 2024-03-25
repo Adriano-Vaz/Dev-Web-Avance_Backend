@@ -2,9 +2,7 @@ package fr.cszw.td_devwebavance.controllers;
 
 import fr.cszw.td_devwebavance.exceptions.DBException;
 import fr.cszw.td_devwebavance.models.Light;
-import fr.cszw.td_devwebavance.repositories.LightRepository;
 import fr.cszw.td_devwebavance.services.LightService;
-import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
