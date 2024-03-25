@@ -45,4 +45,9 @@ public class LightController {
         }
     }
 
+    @DeleteMapping("{id}")
+    public ResponseEntity<Void> deleteLight(@PathVariable Long id) {
+        log.info("We want to delete : " + id);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
 }
