@@ -32,8 +32,8 @@ public class DeviceService {
         existing.setType(device.getType());
         existing.setUserId(device.getUserId());
         existing.setImage(device.getImage());
-        existing.setMarque(device.getMarque());
-        existing.setNbPorts(device.getNbPorts());
+        existing.setBrand(device.getBrand());
+        existing.setPorts(device.getPorts());
         existing.setNetwork(device.getNetwork());
         existing.setIp(device.getIp());
 

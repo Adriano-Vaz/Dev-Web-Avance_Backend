@@ -23,8 +23,8 @@ public class Device {
 
     private String name;
     private String type;
-    private String marque;
-    private Integer nbPorts;
+    private String brand;
+    private Integer ports;
     private String network;
     private String ip;
     private String image;
