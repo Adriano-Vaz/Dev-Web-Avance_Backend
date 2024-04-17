@@ -25,6 +25,11 @@ public class DeviceController {
         return new ResponseEntity<>(this.deviceService.getAllDevices(), HttpStatus.OK);
     }
 
+    @GetMapping("{userId}")
+    public ResponseEntity<List<Device>> getDevicesUser(@PathVariable String userId) {
+        return new ResponseEntity<>(this.deviceService.getDevicesUserId(userId), HttpStatus.OK);
+    }
+
     @PostMapping
     public ResponseEntity<Device> postDevice(@RequestBody Device deviceSent) {
         try {

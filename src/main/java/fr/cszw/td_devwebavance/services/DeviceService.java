@@ -19,6 +19,10 @@ public class DeviceService {
         return this.deviceRepository.findAll();
     }
 
+    public List<Device> getDevicesUserId(String userId) {
+        return this.deviceRepository.findByUserId(userId);
+    }
+
     public Device updateDevice(Device device) throws DBException, NotFoundException {
         Device existing;
 
